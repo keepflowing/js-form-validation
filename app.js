@@ -10,14 +10,14 @@ const zipError = document.querySelector("#zip + p.error");
 
 const invalid = /^(.[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
 
-email.addEventListener("input", (event) => {
+email.addEventListener("focusout", (event) => {
   emailError.innerText = "";
   if (!email.validity.valid) {
     showEmailError();
   }
 });
 
-password.addEventListener("input", (event) => {
+password.addEventListener("focusout", (event) => {
   passwordError.innerText = "";
   if (invalid.test(password.value)) {
     passwordError.innerText = "The password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.";
@@ -27,11 +27,11 @@ password.addEventListener("input", (event) => {
   }
 });
 
-country.addEventListener("input", (event) => {
+country.addEventListener("focusout", (event) => {
   countryError.innerText = "";
 });
 
-zip.addEventListener("input", (event) => {
+zip.addEventListener("focusout", (event) => {
   zipError.innerText = "";
   if (!zip.validity.valid) {
     showZipError();
@@ -39,7 +39,9 @@ zip.addEventListener("input", (event) => {
 });
 
 function showZipError() {
-  if (zip.validity.tooShort) {
+  if (zip.validity.patternMismatch) {
+    zipError.innerText = "Please only use numbers."
+  } else if (zip.validity.tooShort) {
     zipError.innerText = `The Zip code needs to be ${zip.minLength} digits long.`;
   }
 }
@@ -53,7 +55,7 @@ function showPassError() {
 function showEmailError() {
   if (email.validity.patternMismatch) {
     
-    emailError.innerHTML = "Entered value needs to be an email address.<br>Example: john.smith@gmail.com";
+    emailError.innerHTML = "Entered value needs to be a valid email address.<br>Example: john.smith@gmail.com";
 
   } else if (email.validity.tooShort) {
 
