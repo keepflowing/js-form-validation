@@ -19,7 +19,7 @@ email.addEventListener("focusout", (event) => {
 
 password.addEventListener("focusout", (event) => {
   passwordError.innerText = "";
-  if (invalid.test(password.value)) {
+  if (invalid.test(password.value) && password.value.length > 0) {
     passwordError.innerText = "The password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.";
   }
   else if (!password.validity.valid) {
