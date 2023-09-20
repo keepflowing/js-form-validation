@@ -12,6 +12,21 @@ main {
   margin-top: 10rem;
 }
 
+form {
+  border: solid white 2px;
+  padding: 10px;
+  width: 300px;
+}
+
+input, select {
+  display: block;
+  width: 200px;
+}
+
+p {
+  width: 250px;
+}
+
 input:valid {
   border: solid green 2px;
 }
